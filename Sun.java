@@ -26,20 +26,19 @@ class SunPanel extends JPanel
 
     public void paintComponent(Graphics g) 
     {
-        
         Graphics2D gr2D = (Graphics2D) g;
+                
         Shape circle = new Ellipse2D.Double(250, 250, 50, 50);
         Shape lineL = new Line2D.Double(275, 140, 265, 240);
         Shape lineR = new Line2D.Double(275, 140, 285, 240);
         Shape curve = new QuadCurve2D.Double(265, 240, 275, 250, 285, 240);
 
 
-        drawCone(275, 140, 10, 100, gr2D);
-        drawCone(275, 140 + 270, 10, -100, gr2D);
-        drawCone(275, 140, 10, 100, gr2D);
-        drawCone(275, 140, 10, 100, gr2D);
-
-
+        drawCone(275, 140, 10, 100, 0, gr2D);
+        drawCone(275, 140 + 270, 10, -100, 0, gr2D);
+        drawCone(275 + 140, 140 + 135, -100, 10, 1, gr2D);
+        drawCone(275 - 140, 140 + 135, 100, 10, 1,  gr2D);
+        
         gr2D.draw(circle);
         // gr2D.draw(lineL);
         // gr2D.draw(lineR);
@@ -47,7 +46,7 @@ class SunPanel extends JPanel
 
     }
 
-    public void drawOutline(int startx, int starty, int a, int b, int d, Graphics2D g2)
+    public void drawOutline(int x, int y, int a, int b, int d, Graphics2D g2)
     {
         Shape lineL;
         Shape lineR;
@@ -56,7 +55,7 @@ class SunPanel extends JPanel
         {
             if (i == 0 || i == 4)
             {
-                drawCone(startx, starty, a, b, g2);
+               // drawCone(x, y, a, b, g2);
             } 
             else if (i == 2 || i == 6)
             {
@@ -64,38 +63,49 @@ class SunPanel extends JPanel
             } 
             else 
             {
-                drawCone(startx, starty, a, b, g2);
+                //drawCone(x, y, a, b, g2);
             }
             
-            // lineL = new Line2D.Double(startx, starty, startx - a, starty + b);
-            // lineR = new Line2D.Double(startx, starty, startx + a, starty + b);
-            // arc = new QuadCurve2D.Double(startx - a, starty + b, startx, starty + a + b,  startx + a, starty + b);
+            // lineL = new Line2D.Double(x, y, x - a, y + b);
+            // lineR = new Line2D.Double(x, y, x + a, y + b);
+            // arc = new QuadCurve2D.Double(x - a, y + b, x, y + a + b,  x + a, y + b);
             
             // gr2D.draw(lineL);
             // gr2D.draw(lineR);
             // gr2D.draw(arc);
 
-            startx += 100;
-            starty += 30;
+            x += 100;
+            y += 30;
         
 
         }
        
     }
 
-    public void drawCone(int startx, int starty, int a, int b, Graphics2D g2)
+    public void drawCone(int x, int y, int a, int b, int k, Graphics2D g2)
     {
         Shape lineL;
         Shape lineR;
         Shape arc;
  
         int rt = a + b;
-        if (b < 0)
+        if (b < 0 && a > 0)
             rt = - (a - b);
-       
-        lineL = new Line2D.Double(startx, starty, startx - a, starty + b);
-        lineR = new Line2D.Double(startx, starty, startx + a, starty + b);
-        arc = new QuadCurve2D.Double(startx - a, starty + b, startx, starty + rt,  startx + a, starty + b);
+        else if (a < 0 && b > 0)
+            rt = - (b -a);
+        
+        if (k == 0)
+        {
+            lineL = new Line2D.Double(x, y, x - a, y + b);
+            lineR = new Line2D.Double(x, y, x + a, y + b);
+            arc = new QuadCurve2D.Double(x - a, y + b, x, y + rt,  x + a, y + b);
+        } 
+        else
+        {
+            lineL = new Line2D.Double(x, y, x + a, y + b);
+            lineR = new Line2D.Double(x, y, x + a, y - b);
+            arc = new QuadCurve2D.Double(x - a, y + b, x, y + rt,  x + a, y + b);
+        }
         
         g2.draw(lineL);
         g2.draw(lineR);
@@ -103,5 +113,38 @@ class SunPanel extends JPanel
      
     }
 
+    public void Cone(int x, int y, int a, int b, int k, Graphics2D g2)
+    {
+        Shape lineL;
+        Shape lineR;
+        Shape arc;
+ 
+        int rt = a + b;
+        if (b < 0 && a > 0)
+            rt = - (a - b);
+        else if (a < 0 && b > 0)
+            rt = - (b -a);
 
+        for (int i = 0; i < 8; i++) {
+            
+        }
+        
+        if (k == 0)
+        {
+            lineL = new Line2D.Double(x, y, x - a, y + b);
+            lineR = new Line2D.Double(x, y, x + a, y + b);
+            arc = new QuadCurve2D.Double(x - a, y + b, x, y + rt,  x + a, y + b);
+        } 
+        else
+        {
+            lineL = new Line2D.Double(x, y, x + a, y + b);
+            lineR = new Line2D.Double(x, y, x + a, y - b);
+            arc = new QuadCurve2D.Double(x - a, y + b, x, y + rt,  x + a, y + b);
+        }
+        
+        g2.draw(lineL);
+        g2.draw(lineR);
+        g2.draw(arc);
+     
+    }
 }
