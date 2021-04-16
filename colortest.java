@@ -24,6 +24,9 @@ class ct extends JPanel
         this.setPreferredSize(new Dimension(420, 410));
     }
 
+    // ngjyrat mire jone its a 7/10
+    // boje lidhjen e vijave me stroke ato metodat qe jone.
+
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D)g;
@@ -44,8 +47,7 @@ class ct extends JPanel
 
 
         float [] dist = {0.01f, 0.5f, 0.9f};
-        //Color [] colors = {Color.red, Color.blue, Color.pink};
-        Color [] colors = {Color.white, new Color(243,211,12), new Color(134,119,33)};
+        Color [] colors = {new Color(255, 255, 255, 100), new Color(243,211,12), new Color(134,119,33)};
         RadialGradientPaint gradient = new RadialGradientPaint (
             205.0f, 205.0f, 
             95.0f,
@@ -62,29 +64,34 @@ class ct extends JPanel
             MultipleGradientPaint.CycleMethod.NO_CYCLE
         ); 
 
-    
-        int centerx = 205;
-        int centery = 50;
-        int leftx = 195;
-        int lefty = 170;
-        int rightx = 215;
-        int righty = 170;
+        int centerx = 207;
+        int centery = 40;
+        int leftx = 197;
+        int lefty = 165;
+        int rightx = 217;
+        int righty = 165;
 
-         //Kontruktojme konin e madh
-         Polygon poly = new Polygon(new int[] {centerx, leftx, rightx}, new int[] {centery, lefty, righty}, 3);
-         QuadCurve2D curve = new QuadCurve2D.Double(leftx, lefty, 205, 183, rightx, righty);
+        int centerx1 = 272;
+        int centery1 = 55;
+        int leftx1 = 226;
+        int lefty1 = 146;
+        int rightx1 = 239;
+        int righty1 = 152;
 
-         g2.setColor(Color.black);
-         g2.draw(poly);
-         g2.draw(curve);
-         g2.setPaint(gradient);
-         g2.fill(poly);
-         g2.fill(curve);
-         
-         //Konstruktojme konin e vogel
-         Polygon poly1 = new Polygon(new int[] {centerx + 65, leftx + 28, rightx + 23}, new int[] {centery + 15, lefty -25, righty - 20}, 3);
-         QuadCurve2D curve1 = new QuadCurve2D.Double(leftx + 28, lefty - 25, 227, 158, rightx + 23, righty - 20);
- 
+        //Outline per konin e madh
+        Shape lineL = new Line2D.Double(centerx, centery, leftx, lefty);
+        Shape lineR = new Line2D.Double(centerx, centery, rightx, righty);
+        Arc2D arc = new Arc2D.Double(197, 155, 20, 20, 180, 180, Arc2D.OPEN);
+
+        //Outline per konin e vogel
+        Shape lineL1 = new Line2D.Double(centerx1, centery1, leftx1, lefty1);
+        Shape lineR1 = new Line2D.Double(centerx1, centery1, rightx1, righty1);
+        Arc2D arc1 = new Arc2D.Double(226, 141, 14, 14, 160, 180, Arc2D.OPEN);
+
+        //Kontruktojme konin e madh dhe te vogel ne menyre qe te mund t'i ngjyrosim 
+        Polygon poly = new Polygon(new int[] {centerx, leftx, rightx}, new int[] {centery, lefty, righty}, 3);
+        Polygon poly1 = new Polygon(new int[] {centerx1, leftx1, rightx1}, new int[] {centery1, lefty1, righty1}, 3);
+
        
          double pivot = 207;
          for (int i = 0; i < 8; i++) 
@@ -94,31 +101,21 @@ class ct extends JPanel
             g2.setPaint(Color.black);
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-                 g2.draw(tr.createTransformedShape(poly));
-                 g2.draw(tr.createTransformedShape(curve));
+                 g2.draw(tr.createTransformedShape(lineL));
+                 g2.draw(tr.createTransformedShape(lineR));
+                 g2.draw(tr.createTransformedShape(arc));
 
-                 g2.draw(tr.createTransformedShape(poly1));
-                 g2.draw(tr.createTransformedShape(curve1));
+                 g2.draw(tr.createTransformedShape(lineL1));
+                 g2.draw(tr.createTransformedShape(lineR1));
+                 g2.draw(tr.createTransformedShape(arc1));
           
                  g2.setPaint(gradient);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
                  g2.fill(tr.createTransformedShape(poly));
-                 g2.fill(tr.createTransformedShape(curve));       
+                 g2.fill(tr.createTransformedShape(arc));       
  
             g2.setPaint(gradient2);
                  g2.fill(tr.createTransformedShape(poly1));
-                 g2.fill(tr.createTransformedShape(curve1));
+                 g2.fill(tr.createTransformedShape(arc1));
          }
-
-         AffineTransform tx = new AffineTransform();
-         tx.scale(0.9, 0.9);
-
-         Line2D l = new Line2D.Double(205, 80, 205, 170);
-
-
-        //  g2.setStroke(new BasicStroke(1));
-        //  g2.setColor(Color.black);
-        //  g2.draw(l);
-         
     }   
 }

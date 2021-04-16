@@ -19,11 +19,6 @@ public class Transformation
 
 class TRS extends JPanel
 {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
     public TRS()
     {
         this.setPreferredSize(new Dimension(600, 600));
@@ -34,6 +29,8 @@ class TRS extends JPanel
         Graphics2D g2 = (Graphics2D)g;
         g2.setStroke(new BasicStroke(2));
         g2.translate(100, 100);
+
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         Shape circle = new Ellipse2D.Double(182, 182, 50, 50);
             g2.draw(circle);
@@ -64,43 +61,31 @@ class TRS extends JPanel
         Polygon poly1 = new Polygon(new int[] {centerx + 65, leftx + 28, rightx + 23}, new int[] {centery + 15, lefty -25, righty - 20}, 3);
         QuadCurve2D curve1 = new QuadCurve2D.Double(leftx + 28, lefty - 25, 227, 158, rightx + 23, righty - 20);
 
+        Shape lineL = new Line2D.Double(205, 50, 195, 170);
+        Shape lineR = new Line2D.Double(205, 50, 215, 170);
+        Shape lineL1 = new Line2D.Double(270, 65, 223, 145);
+        Shape lineR1 = new Line2D.Double(270, 65, 238, 150);
+
         double pivot = 207;
         for (int i = 0; i < 8; i++) 
         {
            AffineTransform tr = AffineTransform.getRotateInstance(Math.toRadians(360.0 / 8 * i), pivot, pivot);
 
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setPaint(Color.black);
-                g2.draw(tr.createTransformedShape(poly));
                 g2.draw(tr.createTransformedShape(curve));
+                g2.draw(tr.createTransformedShape(curve1));
+                g2.draw(tr.createTransformedShape(lineL));
+                g2.draw(tr.createTransformedShape(lineR));
+                g2.draw(tr.createTransformedShape(lineL1));
+                g2.draw(tr.createTransformedShape(lineR1));
          
+           // g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
             g2.setPaint(grad);
                 g2.fill(tr.createTransformedShape(poly));
-                g2.fill(tr.createTransformedShape(curve));
-
-            g2.setPaint(Color.black);
-                g2.draw(tr.createTransformedShape(poly1));
-                g2.draw(tr.createTransformedShape(curve1));
-
-            g2.setPaint(grad);
+                g2.fill(tr.createTransformedShape(curve));                
                 g2.fill(tr.createTransformedShape(poly1));
                 g2.fill(tr.createTransformedShape(curve1));
-        }
-
-
-        Shape e1 = new Ellipse2D.Double(198.5, 120, 13, 57);
-        // g2.setColor(Color.BLACK);
-        // g2.draw(e1);
-        Point2D a = new Point2D.Double(205, 150);
-        Point2D b = new Point2D.Double(215, 150);
-        LinearGradientPaint grad1 = new LinearGradientPaint(a, b, dist1, colors, MultipleGradientPaint.CycleMethod.REFLECT);
-        //ConicalGradientPaint as = new ConicalGradientPaint()
- 
-        g2.setPaint(grad1);
-        g2.fill(e1);
-        
-
-        
+        } 
     }
-
-    
 }

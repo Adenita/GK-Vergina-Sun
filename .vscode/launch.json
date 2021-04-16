@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch DET1_29",
+            "request": "launch",
+            "mainClass": "DET1_29",
+            "projectName": "Detyra1_74ee08c0"
+        },
+        {
+            "type": "java",
+            "name": "Launch DET1_29",
+            "request": "launch",
+            "mainClass": "DET1_29",
+            "projectName": "Detyra1_5d292fa3"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
