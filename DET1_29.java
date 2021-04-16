@@ -30,7 +30,7 @@ class Panel29 extends JPanel
         g2.setStroke(stroke);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        //Kontruktojme rrethin
+        //Krijojme rrethin
         Shape circle = new Ellipse2D.Double(181, 181, 55, 55);
         g2.draw(circle);
 
@@ -69,12 +69,12 @@ class Panel29 extends JPanel
         Polygon poly = new Polygon(new int[] {centerx, leftx, rightx}, new int[] {centery, lefty, righty}, 3);
         Polygon poly1 = new Polygon(new int[] {centerx1, leftx1, rightx1}, new int[] {centery1, lefty1, righty1}, 3);
         
-        // Kontruktojme pjesen e ndritshme brenda konit te madh
-        Polygon poly2 = new Polygon(new int[] {204, 199, 215, 210}, new int[] {100, 164, 164, 100}, 4);
-        Arc2D arc2a = new Arc2D.Double(199, 155, 16, 17, 180, 180, Arc2D.OPEN);
+        //Kontruktojme pjesen e ndritshme brenda konit te madh
+        Polygon poly2 = new Polygon(new int[] {204, 198, 216, 210}, new int[] {100, 164, 164, 100}, 4);
+        Arc2D arc2a = new Arc2D.Double(198, 155, 18, 17, 180, 180, Arc2D.OPEN);
         Arc2D arc2b = new Arc2D.Double(204, 98, 6, 10, 360, 180, Arc2D.OPEN);    
  
-        float [] dist = {0.01f, 0.35f, 0.85f};
+        float [] dist = {0.01f, 0.35f, 0.89f};
         Color [] colors = {new Color(255, 255, 255, 0), new Color(243,211,12), new Color(134,119,33)};
         
         RadialGradientPaint gradientN = new RadialGradientPaint (207.0f, 207.0f, 110.0f, dist, colors, MultipleGradientPaint.CycleMethod.NO_CYCLE);  
@@ -85,7 +85,7 @@ class Panel29 extends JPanel
        
         RadialGradientPaint gradientKm = new RadialGradientPaint (207.0f, 207.0f, 80.0f, dista, colorsa, MultipleGradientPaint.CycleMethod.NO_CYCLE);  
 
-        //Rrotullojme konet e konstruktuar tete here
+        //Rrotullojme konet e konstruktuar me ane te AffineTransform
          double pivot = 208;
          for (int i = 0; i < 8; i++) 
          {
